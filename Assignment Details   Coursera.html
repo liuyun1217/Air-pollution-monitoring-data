@@ -1,0 +1,435 @@
+<!DOCTYPE html><html xmlns:fb="http://ogp.me/ns/fb#" itemtype="http://schema.org"><head><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE7"><meta name="fragment" content="!"><meta name="robots" content="NOODP"><meta charset="utf-8"><meta property="og:title" content="Coursera"><meta property="og:type" content="website"><meta property="og:image" content="http://s3.amazonaws.com/coursera/media/Coursera_Computer_Narrow.png"><meta property="og:url" content="https://www.coursera.org/"><meta property="og:site_name" content="Coursera"><meta property="og:locale" content="en_US"><meta property="og:description" content="Take free online classes from 80+ top universities and organizations. Coursera is a social entrepreneurship company partnering with Stanford University, Yale University, Princeton University and others around the world to offer courses online for anyone to take, for free. We believe in connecting people to a great education so that anyone around the world can learn without limits."><meta property="fb:admins" content="727836538,4807654"><meta property="fb:app_id" content="274998519252278"><meta name="twitter:site" content="Coursera"><meta name="twitter:app:name:iphone" content="Coursera"><meta name="twitter:app:name:ipad" content="Coursera"><meta name="twitter:app:name:googleplay" content="Coursera"><meta name="twitter:app:id:iphone" content="id736535961"><meta name="twitter:app:id:ipad" content="id736535961"><meta name="twitter:app:id:googleplay" content="org.coursera.android"><meta name="description" content="Take free online classes from 80+ top universities and organizations. Coursera is a social entrepreneurship company partnering with Stanford University, Yale University, Princeton University and others around the world to offer courses online for anyone to take, for free. We believe in connecting people to a great education so that anyone around the world can learn without limits."><meta name="image" content="http://s3.amazonaws.com/coursera/media/Coursera_Computer_Narrow.png"><meta name="apple-itunes-app" content="app-id=736535961"><title>Assignment Details | Coursera</title>    <link href='https://dw0ugk4msqulk.cloudfront.net/3247aabc1274a35bec737edba575e8a4caf73398/css/spark.main.css' rel='stylesheet' type='text/css' >
+      <link href='https://www.coursera.org/maestro/api/course/973973/course.css' rel='stylesheet' type='text/css' >
+    <link href='https://spark-public.s3.amazonaws.com/rprog/static/images/favicon.ico' rel='icon' >
+</head><body><div id="fb-root"></div><div id="spark-help" class="hide"><div data-helpwidget data-helpwidget-link-help="http://support.coursera.org" data-helpwidget-link-discuss="http://class.coursera.org/mooc/" data-helpwidget-link-filter="coursera-admin-helpwidget-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" class="helpwidget-tab">Admin Help</div></div><a href="https://courserahelp.zendesk.com/hc/requests/new" target="_blank"><div style="z-index: 1" data-networkprioritysupportwidget role="button" class="helpwidget-tab hide">Premium Support</div></a><div id="spark" class="hide"><h2 class="course-page-header">
+  <span>编程作业 1: 空气污染: Instructions</span>
+
+  <a class="coursera-reporter-link" title="Click here if you're experiencing technical problems or found errors in the course materials." target="_blank" href="https://accounts.coursera.org/i/zendesk/courserahelp?return_to=https://courserahelp.zendesk.com/hc/en-us/articles/201212249-Programming-Assignments">
+     Help
+  </a>
+</h2>
+
+<p>
+</p><h3>简介</h3>
+
+第一个编程作业中，你需要编写三个函数以便与此作业附带的数据集进行交互。数据集包含在zip文件
+<b>specdata.zip</b>中，你可以从Coursera网站下载。
+
+<h3>数据</h3>
+
+包含数据的zip文件可以在此下载:
+
+<ul><li>
+<a href="https://d396qusza40orc.cloudfront.net/rprog%2Fdata%2Fspecdata.zip">specdata.zip</a>
+[2.4MB]
+</li></ul>
+
+该zip文件包含332个逗号分隔值(comma-separated-value /CSV)文件，其中包含美国332个位置的细颗粒物(PM)空气污染的污染监测数据。每个文件都包含一个监测点的数据，且每个监测点的ID编号均包含在文件名中。例如，监测点200包含在文件“200.csv”中。每个文件都包含三个变量：:
+
+<ul><li>日期: YYYY-MM-DD （年-月-日）格式的检测日期
+</li>
+  <li>硫酸盐: 相应日期内空气中硫酸盐(sulfate)颗粒物的污染程度
+（计量单位为微克/立方米）
+</li>
+  <li>硝酸盐:相应日期内空气中硝酸盐(nitrate)颗粒物的污染程度
+（计量单位为微克/立方米）
+</li>
+</ul>
+
+对于此编程作业，你需要解压缩该文件并创建目录“specdata”。将zip文件解压缩之后，不要对“specdata”目录中的文件进行任何修改。在每个文件中，您都会发现有许多天没有硫酸盐或硝酸盐（或两者都没有，编码为NA）。这在美国空气污染监测数据中是很常见的。
+
+<h3>第一部分</h3>
+
+编写名为“pollutantmean”的函数，计算指定列表中的所有监测点的污染物（硫酸盐或硝酸盐）平均值。函数“pollutantmean”有三个参数：“directory”、“pollutant”和“id”。如果指定向量监测点的ID编号，那么“pollutantmean”会从“directory”参数中指定的目录下读取监测点的颗粒物数据，并返回所有监测点的污染物平均值，忽略代码为NA的任何缺失值。该函数的原型如下
+
+<pre>
+pollutantmean &lt;- function(directory, pollutant, id = 1:332) {
+        ## 'directory' 是长度为1的字符向量，指明
+        ## CSV文件的位置
+
+        ## 'pollutant' 是长度为1的字符向量，指明
+        ## 污染物的名称，我们将会计算其
+        ## 平均值; 要么是“硫酸盐(sulfate)”要么是“硝酸盐(nitrate)”
+
+        ## 'id'是正整数向量，指明监测点的ID，
+        ## 将要被要使用的
+
+        ## 返回列表内的所有监测点的污染物平均值，
+        ## “id”向量中的 (忽略 NA值)
+}
+</pre>
+
+你可以看到一些<a href="https://d396qusza40orc.cloudfront.net/rprog%2Fdoc%2Fpollutantmean-demo.html">此函数的示例输出</a>. 你编写的函数应该能与此输出匹配。 请将你的代码保存到名为<b>pollutantmean.R</b>的文件中。
+
+
+<h3>第二部分</h3>
+
+编写一个函数，用于读取装满文件的目录，并报告每个数据文件中完整观测到的案例数。该函数应该会返回数据帧，其中第一列是该文件的名称，第二列是完整案例的数量。
+该函数的原型如下
+
+<pre>
+complete &lt;- function(directory, id = 1:332) {
+        ## 'directory' 是长度为1的字符向量，指明
+        ##  CSV 文件的位置
+
+        ## 'id' 是正整数向量，指明监测点的ID号，
+        ## 将要被使用的
+        
+        ## 返回以下格式的数据帧：
+        ## id nobs
+        ## 1  117
+        ## 2  1041
+        ## ...
+        ## 其中'id' 是监测点ID编号，而'nobs'是
+        ## 完整案例的数量
+}
+</pre>
+
+你可以看到一些 <a href="https://d396qusza40orc.cloudfront.net/rprog%2Fdoc%2Fcomplete-demo.html">此函数的示例输出</a>。 你编写的函数应该能与此输出匹配。请将你的代码保存到名为 
+ <b>complete.R</b>的文件中。要运行此部分提交的版本，请确保你的工作目录下含有文件 <b>complete.R</b>。
+
+
+<h3>第三部分</h3>
+
+编写用于获取数据文件目录和完整案例阈值的函数，并计算监测位置中硫酸盐和硝酸盐之间的相关性，其中完整观测的案例数（针对所有变量）大于阈值。该函数将返回监测点的相关性向量，以满足阈值要求。如果没有监测点可以满足阈值要求，则该函数将返回长度为0的数值向量。该函数的原型如下
+
+<pre>
+corr &lt;- function(directory, threshold = 0) {
+        ## 'directory' 是长度为1的字符向量，指明
+        ##  CSV 文件的位置
+
+        ## 'threshold' 是长度为1的数值向量，指明
+        ## 完整观测的案例的数量 (针对所有
+        ## 变量) 是必须的，为了计算这两个的相关性：
+        ## 硝酸盐(nitrate)和硫酸盐(sulfate); 默认值为 0
+
+        ## 返回相关性的数值向量
+}
+</pre>
+
+在这个函数中你需要使用R中的 'cor'函数，它是用来计算两个向量之间的相关性。
+请通过 '?cor' 阅读该函数的帮助页面，确保你了解其使用方法。
+
+<p>你可以看到一些<a href="https://d396qusza40orc.cloudfront.net/rprog%2Fdoc%2Fcorr-demo.html">该函数的示例输出</a>。你所写的函数必须能够和这个输出匹配。请将你的代码保存在名为
+ <b>corr.R</b>的文件中。要运行此部分提交的版本，请确保你的工作目录下含有文件 <b>corr.R</b>。
+
+
+</p><h3>评分</h3>
+
+此作业将使用通过你的计算机运行的提交脚本执行的单元测试进行评分。要获得提交脚本，请使用R运行以下代码：
+
+<pre>
+source("http://d396qusza40orc.cloudfront.net/rprog%2Fscripts%2Fsubmitscript1.R")
+</pre>
+或者你可以 <a href="https://d396qusza40orc.cloudfront.net/rprog%2Fscripts%2Fsubmitscript1.R">下载脚本</a> 到你的工作目录（注意：你可能需要将文件重新命名为"submitscript1.R"，然后通过
+<pre>
+source("submitscript1.R")
+</pre>对文件进行本地寻源。
+
+首次运行提交脚本时，系统会提示您输入提交登录帐户和密码。可以在“编程作业”页面顶部找到这些内容。要执行提交脚本，请在控制台(console)提示符上输入
+
+<pre>
+submit()
+</pre>
+
+（在为文件寻源之后）。 <b>注意，你必须连接到互联网，才能正常提交脚本。在R中执行<tt>submit</tt>脚本提交时，你会看到以下菜单（在输入提交登录电子邮件和密码之后）：
+
+</b><pre><b>
+[1] 'pollutantmean' part 1
+[2] 'pollutantmean' part 2
+[3] 'pollutantmean' part 3
+[4] 'pollutantmean' part 4
+[5] 'complete' part 1
+[6] 'complete' part 2
+[7] 'complete' part 3
+[8] 'corr' part 2
+[9] 'corr' part 2
+[10] 'corr' part 2
+Which part are you submitting [1-10]? 
+</b></pre><b>
+
+我们会将你的函数输出与正确输出进行比较。每次通过测试，你都会在“作业列表”
+网页上得到指定分数。
+
+</b><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  
+  styleSheets: [],
+  styles: {},
+
+  jax: ["input/TeX"],
+  
+  extensions: ["tex2jax.js"],
+
+  preJax: null,
+  postJax: null,
+
+  preRemoveClass: "MathJax_Preview",
+
+  showProcessingMessages: true,
+
+  messageStyle: "none",
+  
+  displayAlign: "center",
+  displayIndent: "0em",
+  
+  delayStartupUntil: "none",
+
+  skipStartupTypeset: false,
+  
+  elements: [],
+  
+  tex2jax: {
+	    inlineMath: [
+	                 ['$$','$$'],      // uncomment this for standard TeX math delimiters
+	                 ['\\(','\\)']
+	                 ],
+
+	                 displayMath: [
+	                 ['\\[','\\]']
+	                 ],
+
+    skipTags: ["script","noscript","style","textarea","pre","code"],
+    ignoreClass: "tex2jax_ignore",
+    processClass: "tex2jax_process",
+    processEscapes: false,
+    processEnvironments: true,
+    preview: "TeX"
+    
+  },
+  
+  mml2jax: {
+    preview: "alttext"
+    
+  },
+  
+  jsMath2jax: {
+    preview: "TeX"
+    
+  },
+
+  TeX: {
+    TagSide: "right",
+    TagIndent: ".8em",
+    MultLineWidth: "85%",
+    Macros: {},
+
+    extensions: ["AMSmath.js", "AMSsymbols.js"]
+    
+  },
+
+  //============================================================================
+  //
+  //  These parameters control the MathML inupt jax.
+  //
+  MathML: {
+    //
+    //  This specifies whether to use TeX spacing or MathML spacing when the
+    //  HTML-CSS output jax is used.
+    //
+    useMathMLspacing: false
+  },
+  
+  //============================================================================
+  //
+  //  These parameters control the HTML-CSS output jax.
+  //
+  "HTML-CSS": {
+    
+    scale: 100,
+    
+    availableFonts: ["STIX","TeX"],
+    
+    preferredFont: "TeX",
+    
+    webFont: "TeX",
+    
+    imageFont: "TeX",
+    
+    undefinedFamily: "STIXGeneral,'Arial Unicode MS',serif",
+      
+    showMathMenu: true,
+
+    styles: {},
+    
+    tooltip: {
+      delayPost: 600,          // milliseconds delay before tooltip is posted after mouseover
+      delayClear: 600,         // milliseconds delay before tooltip is cleared after mouseout
+      offsetX: 10, offsetY: 5  // pixels to offset tooltip from mouse position
+    }
+  },
+  
+  //============================================================================
+  //
+  //  These parameters control the NativeMML output jax.
+  //
+  NativeMML: {
+
+    scale: 100,
+
+    showMathMenu: true,
+    showMathMenuMSIE: true,
+
+    styles: {}
+  },
+  
+  MathMenu: {
+    delay: 400,
+    
+    helpURL: "http://www.mathjax.org/help/user/",
+
+    showRenderer: true,
+    showFontMenu: false,
+    showContext:  false,
+
+    windowSettings: {
+      status: "no", toolbar: "no", locationbar: "no", menubar: "no",
+      directories: "no", personalbar: "no", resizable: "yes", scrollbars: "yes",
+      width: 100, height: 50
+    },
+    
+    styles: {}
+    
+  },
+
+  MMLorHTML: {
+    prefer: {
+      MSIE:    "MML",
+      Firefox: "HTML",
+      Opera:   "HTML",
+      other:   "HTML"
+    }
+  }
+});
+</script>
+<script type="text/javascript">
+(function () {
+
+  function loadMathJax() {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://duqnjvq4jwr55.cloudfront.net/2.1/MathJax.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  }
+
+  window.loadOrRefreshMathJax = function(domId) {
+    if (window.MathJax) {
+      if (domId) {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, domId]);
+      } else {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+    } else {
+      loadMathJax();
+    }
+  }
+})();
+</script></div><!-- - track IE8 and less browser for eventing purposes--><!--[if lte IE 8]><script>window._204 = window._204 || [];
+window._gaq = window._gaq || [];
+window._gaq.push(
+    ['_setAccount', 'UA-28377374-1'],
+    ['_setDomainName', window.location.hostname],
+    ['_setAllowLinker', true],
+    ['_trackPageview', window.location.pathname]);
+window._204.push(
+  ['client', 'home'],
+  {key:"pageview", value:window.location.pathname});</script><script src="https://dw0ugk4msqulk.cloudfront.net/3247aabc1274a35bec737edba575e8a4caf73398/js/lib/204.js"></script><script src="https://ssl.google-analytics.com/ga.js"></script><![endif]--><div id="fb-root"></div><div id="origami" data-js="origami"><div style="position:absolute;top:0px;left:0px;width:100%;height:100%;background:#f5f5f5;padding-top:5%;"><div id="coursera-loading-nojs" style="text-align:center; margin-bottom:10px;display:none;"><div>Please use a <a href="https://courserahelp.zendesk.com/hc/articles/201522945-Recommended-Software-and-Devices">modern browser </a> with JavaScript enabled to use Coursera.</div><div id="get-browser-zh" style="display:none;">请下载现代的浏览器（<a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie">IE11</a>或<a href="https://www.google.com/intl/zh-CN/chrome/browser/">Google Chrome</a>）来使用Coursera。</div></div><div><span id="coursera-loading-js" style="display: none; padding-left:45%; font-size: 14px; line-height: 1.428571429; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif">loading &nbsp;&nbsp;<img src="https://dw0ugk4msqulk.cloudfront.net/images/icons/loading.gif"></span></div><noscript><div style="text-align:center; margin-bottom:10px;">Please use a <a href="https://courserahelp.zendesk.com/hc/articles/201522945-Recommended-Software-and-Devices">modern browser </a> with JavaScript enabled to use Coursera.</div></noscript></div></div><!--[if gte IE 9]><script>document.getElementById("coursera-loading-js").style.display = 'block';</script><![endif]-->
+<!--[if lte IE 8]><script>document.getElementById("coursera-loading-nojs").style.display = 'block';</script><![endif]-->
+<!--[if !IE]> --><script>document.getElementById("coursera-loading-js").style.display = 'block';</script><!-- <![endif]--><script>if (/zh/i.test(window.localStorage ? localStorage.getItem('locale') : '') || '{{ locale }}') {
+  document.getElementById('get-browser-zh').style.display = 'block';
+}</script><!--[if !IE]> --><script>document.getElementById('coursera-loading-js').style.display = 'block';</script><!-- <![endif]-->
+    <script src='https://dw0ugk4msqulk.cloudfront.net/3247aabc1274a35bec737edba575e8a4caf73398/js/vendor/jquery.v1-7.js' ></script>
+      <script src='https://dw0ugk4msqulk.cloudfront.net/3247aabc1274a35bec737edba575e8a4caf73398/spark/core/js/loadOrRefreshMathJax.js' ></script>
+  <script src="https://dw0ugk4msqulk.cloudfront.net/3247aabc1274a35bec737edba575e8a4caf73398/js/vendor/require.v2-1-1.js"></script><script data-baseurl="https://dw0ugk4msqulk.cloudfront.net/3247aabc1274a35bec737edba575e8a4caf73398/" data-version="3247aabc1274a35bec737edba575e8a4caf73398" data-timestamp='1418259243324' data-debug='0' data-locale="zh_CN" id="_require">if(document.getElementById('coursera-loading-js').style.display == 'block') {
+  (function(el) {
+     require.config({
+       //enforceDefine: true,
+       waitSeconds: 75,
+       baseUrl: el.getAttribute('data-baseurl'),
+       urlArgs: el.getAttribute('data-debug') == '1' ? 'v=' + el.getAttribute('data-timestamp') : '',
+       shim: {
+          'underscore': {
+             exports: '_'
+          },
+          'backbone': {
+             deps: ['underscore', 'jquery'],
+             exports: 'Backbone',
+             init: function(_, $) {
+               Backbone.$ = $;
+               return Backbone;
+             }
+          },
+          'pages/hg/thirdparty/js/backbone.marionette': {
+            deps: ['backbone']
+          },
+          'pages/hg/thirdparty/js/webshims/polyfiller': {
+            deps: ['jquery']
+          },
+          'pages/hg/thirdparty/js/webshims/extras/mousepress': {
+            deps: ['jquery', 'pages/hg/thirdparty/js/webshims/polyfiller']
+          },
+          'pages/hg/thirdparty/js/jquery.throttle': {
+            deps: ['jquery']
+          },
+          'js/lib/jquery.linkify': {
+            deps: ['jquery']
+          },
+          'pages/hg/thirdparty/js/js/bootstrap/alert': {
+            deps: ['jquery', 'pages/hg/thirdparty/js/bootstrap/transition']
+          },
+          'spark/core/js/jquery_ui': {
+            deps: ['jquery']
+          },
+          'spark/core/js/jquery.history': {
+            deps: ['jquery']
+          },
+          'js/lib/bootstrap.tooltip': {
+            deps: ['jquery']
+          },
+          'pages/hg/thirdparty/js/bootstrap/transition': {
+            deps: ['jquery']
+          },
+          'pages/hg/thirdparty/js/bootstrap/tab': {
+            deps: ['jquery']
+          },
+          'bundles/videojs/lib/video.4.3.0': {
+            exports: 'vjs'
+          }
+       },
+       paths: {
+          'q': 'js/vendor/q.v1-0-1',
+          'react-with-addons': 'js/vendor/react-with-addons.v0-12',
+          'jquery':                         'pages/spark/jquery',
+          'underscore':                     'js/vendor/underscore.v1-5-2',
+          'backbone':                       'js/vendor/backbone.v1-1-0',
+          'backbone.relational':            'js/lib/backbone.relational.0.8.6',
+          'i18n':                           'js/lib/i18n._t',
+          'css':                            'js/vendor/require.css.v0-1-2',
+          'memoize':                        'js/lib/require.memoize.v0-0-1',
+          'pages/spark/models/user.json':   'empty:',
+          'pages/spark/models/course.json': 'empty:',
+          'pages/spark/models/navbar.json': 'empty:'
+       },
+       callback: function() {
+                    require(['pages/spark/routes']);
+                },
+       config: {
+         i18n: {
+           locale: (window.localStorage ? localStorage.getItem('locale') : '') || el.getAttribute('data-locale')
+         }
+       }
+     });
+  })(document.getElementById('_require'));
+}
+</script><script>define('pages/spark/models/user.json', [], function(){
+      return JSON.parse("{\"id\":7635407,\"email_address\":\"liuyun_ucas@163.com\",\"full_name\":\"\\u5218\\u4e91\",\"locale\":\"zh_CN\",\"timezone\":\"Asia\\\/Hong_Kong\",\"access_group_id\":\"4\",\"registration_time\":\"1418004519\",\"last_access_time\":\"1418261400\",\"last_access_ip\":\"124.16.232.9\",\"signature_track_register_time\":\"0\",\"email_announcement\":\"1\",\"email_forum\":\"1\",\"in_signature_track\":\"0\",\"wishes_proctored_exam\":\"0\",\"first_name\":\"\\u5218\\u4e91\",\"permissions\":[\"default\",\"allow_site_access\"],\"group\":\"Student\",\"anonymous\":false,\"forum_title\":\"Student\",\"signature_track_state\":1,\"verified_quizzes\":[],\"submitted_quizzes\":[\"97\",\"99\"],\"scheduled_proctored_exam\":null,\"last_chance_modal\":1,\"flexjoin_last_chance_modal\":null}");
+  });
+define('pages/spark/models/course.json', [], function(){
+      return JSON.parse("{\"id\":973973,\"isPrivate\":false,\"type\":\"public\",\"name\":\"R Programming\",\"instructor\":\"Roger D. Peng, PhD, Jeff Leek, PhD, Brian Caffo, PhD\",\"sessionName\":\"rprog-017\",\"externalBaseURL\":\"https:\\\/\\\/www.coursera.org\\\/\",\"shortname\":\"rprog\",\"host\":\"https:\\\/\\\/www.coursera.org\\\/\",\"assetUnversionedLink\":\"https:\\\/\\\/dw0ugk4msqulk.cloudfront.net\\\/\",\"cheggID\":\"\",\"hasLTI\":true,\"badgevilleDomain\":\"\",\"linkable\":false,\"universityShortname\":\"jhu\",\"signatureTrackStatus\":{\"signature_track_enabled\":1},\"courseURLs\":{\"log_in_link\":\"https:\\\/\\\/accounts.coursera.org\\\/signin?post_redirect=https%3A%2F%2Faccounts.coursera.org%2Fsignin%3Fuser_action%3Dclass%26course_id%3D973973%26post_redirect%3Dhttps%253A%252F%252Fclass.coursera.org%252Frprog-017%252Fauth%252Fauth_redirector%253Ftype%253Dlogin%2526subtype%253Dnormal%2526visiting%253D\",\"sign_up_link\":\"https:\\\/\\\/accounts.coursera.org\\\/signup?enroll_cid=973973&enroll_sn=rprog&enroll_n=R Programming\",\"view_course_info_link\":\"https:\\\/\\\/www.coursera.org\\\/course\\\/rprog\",\"sign_up_link_cant_enroll\":\"https:\\\/\\\/accounts.coursera.org\\\/signup?post_redirect=https%3A%2F%2Fwww.coursera.org%2Fcourse%2Frprog\"},\"courseBase\":\"https:\\\/\\\/class.coursera.org\\\/rprog-017\\\/\",\"search\":true,\"hideWiki\":true,\"aceStartRegistrationDate\":\"Thu  1 Jan 1970  8:00 AM HKT\",\"aceEndRegistrationDate\":\"Thu  1 Jan 1970  8:00 AM HKT\",\"aceExamStartDate\":\"Thu  1 Jan 1970  8:00 AM HKT\",\"aceExamEndDate\":\"Thu  1 Jan 1970  8:00 AM HKT\",\"aceExamRules\":\"\",\"aceExamDuration\":\"\",\"aceBeforeExam\":false,\"aceAfterExam\":true,\"aceHours\":null,\"aceCreditType\":\"\",\"acePrice\":null,\"aceExamID\":null,\"aceEligible\":false,\"canRegisterForACE\":false,\"specialization\":{\"numCourse\":9,\"image\":\"https:\\\/\\\/s3.amazonaws.com\\\/coursera\\\/specializations\\\/jhudatascience\\\/logo_small.png\",\"id\":1,\"short_name\":\"jhudatascience\",\"name\":\"Data Science\"},\"supportForums\":true,\"textbooks\":\"\",\"inVideoQuizV2\":false,\"in_flexjoin\":0,\"honorCodeExtraText\":\"\",\"honorCodeCustomTitle\":\"\",\"honorCodeCustomButton\":\"\",\"studentAccessDisabled\":0,\"disableQQs\":false}");
+  });
+  define('pages/spark/models/navbar.json', [], function(){
+      return JSON.parse("{\"items\":[{\"name\":\"\\u516c\\u544a\",\"icon\":\"\",\"link_type\":\"circuit\",\"link_data\":\"class:index\"},{\"name\":\"\\u5173\\u4e8e\\u672c\\u8bfe\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"\\u8bfe\\u7a0b\\u5927\\u7eb2\",\"icon\":\"wiki\",\"link_type\":\"wiki\",\"link_data\":\"syllabus\"},{\"name\":\"\\u5173\\u4e8e\\u6388\\u8bfe\\u6559\\u5e08\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"About_the_Instructor\"},{\"name\":\"\\u8bfe\\u524d\\u8c03\\u67e5\",\"icon\":\"\",\"link_type\":\"window_link\",\"link_data\":\"https:\\\/\\\/www.surveymonkey.com\\\/r\\\/WBJ3VLQ\"},{\"name\":\"\\u6bcf\\u5468\\u5185\\u5bb9\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"\\u7b2c\\u4e00\\u5468\\uff1aR\\u8bed\\u8a00\\u57fa\\u7840\\u77e5\\u8bc6\",\"icon\":\"home\",\"link_type\":\"wiki\",\"link_data\":\"Week_1\"},{\"name\":\"\\u7b2c\\u4e8c\\u5468\\uff1a\\u4f7f\\u7528R\\u8bed\\u8a00\\u8fdb\\u884c\\u7f16\\u7a0b\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"Week_2\"},{\"name\":\"\\u7b2c\\u4e09\\u5468\\uff1a\\u5faa\\u73af\\u51fd\\u6570\\u548c\\u4ee3\\u7801\\u8c03\\u8bd5\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"Week_3\"},{\"name\":\"\\u7b2c\\u56db\\u5468\\uff1a\\u6a21\\u62df\\u548c\\u5206\\u6790\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"Week_4\"},{\"name\":\"\\u8bfe\\u7a0b\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"\\u8bfe\\u7a0b\\u89c6\\u9891\",\"icon\":\"\",\"link_type\":\"circuit\",\"link_data\":\"lecture:index\"},{\"name\":\"\\u8bfe\\u7a0b\\u8bb2\\u4e49\\uff08\\u94fe\\u63a5\\u81f3GitHub\\uff09\",\"icon\":\"\",\"link_type\":\"window_link\",\"link_data\":\"https:\\\/\\\/github.com\\\/rdpeng\\\/courses\\\/tree\\\/master\\\/02_RProgramming\"},{\"name\":\"\\u7ec3\\u4e60\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"\\u6d4b\\u9a8c\",\"icon\":\"quiz\",\"link_type\":\"circuit\",\"link_data\":\"quiz:index\"},{\"name\":\"\\u7f16\\u7a0b\\u4f5c\\u4e1a 1, 3, \\u4ee5\\u53ca swirl\",\"icon\":\"assignment\",\"link_type\":\"circuit\",\"link_data\":\"assignment:index\"},{\"name\":\"\\u7f16\\u7a0b\\u4f5c\\u4e1a 2\",\"icon\":\"assignment\",\"link_type\":\"circuit\",\"link_data\":\"human_grading:index\"},{\"name\":\"\",\"icon\":\"\",\"link_type\":\"circuit\",\"link_data\":\"\"},{\"name\":\"\\u793e\\u533a\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"\\u6570\\u636e\\u79d1\\u5b66\\u4e13\\u9879\\u8bfe\\u7a0b\\u793e\\u533a\\u7f51\\u7ad9\",\"icon\":\"\",\"link_type\":\"window_link\",\"link_data\":\"http:\\\/\\\/datasciencespecialization.github.io\\\/\"},{\"name\":\"\\u8bba\\u575b\",\"icon\":\"\",\"link_type\":\"circuit\",\"link_data\":\"forum:index\"}]}");
+  });
+</script><script>var coursera_enable_new_help_center = true;
+</script></body></html>
